@@ -106,12 +106,26 @@
             Telegram.WebApp.showAlert('Main Button was clicked')
         });	
         Telegram.WebApp.MainButton.show();
+        // function displayUserData() {
+        //     const user = window.Telegram.WebApp.initDataUnsafe.user;
+        //     document.getElementById('user-data').textContent = 'No user data available.';
+
+        //     if (user) {
+        //         document.getElementById('user-id').textContent = `ID: ${user.id}`;
+        //         document.getElementById('user-first-name').textContent = `First Name: ${user.first_name}`;
+        //         document.getElementById('user-last-name').textContent = `Last Name: ${user.last_name || 'N/A'}`;
+        //         document.getElementById('user-username').textContent = `Username: ${user.username || 'N/A'}`;
+        //     } else {
+        //         document.getElementById('user-data').textContent = 'No user data available.';
+        //     }
+        // }
 
         // Function to call showPopup API
         function showPopup() {
+            const user = Telegram.WebApp.initDataUnsafe.user;
             Telegram.WebApp.showPopup({
-                title: 'Title',
-                message: 'Some message',
+                title: `ID: ${user.id}`,
+                message: `First Name: ${user.first_name} Last Name: ${user.last_name || 'N/A'} Username: ${user.username || 'N/A'}`,
                 buttons: [
                     {id: 'link', type: 'default', text: 'Open ton.org'},
                     {type: 'cancel'},
