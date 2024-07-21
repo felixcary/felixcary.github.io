@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        #user-data {
+            margin-top: 20px;
+        }
+        .data-item {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Telegram Mini App</h1>
+    <div id="user-data">
+        <div class="data-item" id="user-id"></div>
+        <div class="data-item" id="user-first-name"></div>
+        <div class="data-item" id="user-last-name"></div>
+        <div class="data-item" id="user-username"></div>
+    </div>
+    <script>
+        window.Telegram.WebApp.ready();
+
+        // Function to display user data
+        function displayUserData() {
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+            if (user) {
+                document.getElementById('user-id').textContent = `ID: ${user.id}`;
+                document.getElementById('user-first-name').textContent = `First Name: ${user.first_name}`;
+                document.getElementById('user-last-name').textContent = `Last Name: ${user.last_name || 'N/A'}`;
+                document.getElementById('user-username').textContent = `Username: ${user.username || 'N/A'}`;
+            } else {
+                document.getElementById('user-data').textContent = 'No user data available.';
+            }
+        }
+
+        // Ensure Telegram Web App is initialized before accessing user data
+        window.Telegram.WebApp.onEvent('mainButtonClicked', displayUserData);
+
+        // Display user data when the web app is opened
+        displayUserData();
+    </script>
+</body>
+</html>
